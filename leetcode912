@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        
+        mergeSort(nums,0,nums.size()-1);
+        return nums;
+    }
+private:
+void mergeSort(vector<int>&A,int p,int r){
+    if(p<r){
+        int q=(p+r)/2;
+        mergeSort(A,p,q);
+        mergeSort(A,q+1,r);
+        merge(A,p,q,r);
+    }
+    }
+void merge(vector<int>&A,int p,int q,int r ){
+    int nL=q-p+1,nR=r-(q+1)+1;
+    vector<int>L(nL);
+    vector<int>R(nR);
+    for(int i=0;i<nL;i++){
+        L[i]=A[p+i];
+    }
+     for(int j=0;j<nR;j++){
+        R[j]=A[q+1+j];
+    }
+    int i=0,j=0,k=p;
+    while(i<nL&&j<nR){
+    if(L[i]<R[j]){
+        A[k]=L[i];
+        i++;
+    }
+    else{
+        A[k]=R[j];
+        j++;
+    }
+    k++;
+    }
+    while(i<nL){
+        A[k]=L[i];
+        i++;
+        k++;
+    }
+    while(j<nR){
+        A[k]=R[j];
+        j++;
+        k++;
+    }
+    
+}
+};
